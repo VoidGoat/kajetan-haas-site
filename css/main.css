@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  background-color: white;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+
+}
+
+.fade-in {
+  animation-name: fade;
+  animation-duration: 4s;
+}
+
+.profile-pic {
+  border: 1px solid black;
+  position: absolute;
+  top: 10px;
+}
+.logo {
+  position: absolute;
+  bottom: 0;
+  max-height: 100%;
+  max-width: 100%;
+  opacity: 0.8;
+  z-index: -1;
+}
+.circle-corners {
+  border-radius: 100px;
+}
+
+.footer-button {
+  font-size: 30px;
+  width: auto;
+  min-width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+
+  padding: 0px;
+  margin: 10px;
+  color: black;
+  border: 1px solid black;
+  transition: color 0.5s, transform 0.2s, background-color 0.5s;
+}
+.footer-button:hover {
+  transform: scale(1.2);
+  background-color: #bfbfbf;
+  text-decoration: none;
+}
+@keyframes move {
+    0%   {top: 100%; opacity: 0; width: 0; height: 0; border-radius: 100px; margin-left: 0;}
+    30% {top: 48%; opacity: 1; width: 200px; height: 200px; margin-left: -100px; border-radius: 100px;}
+    60% {top: 50%; width: 300px; margin-left: -150px; border-radius: 10px;}
+    80% { height: 400px;}
+}
+@keyframes fade {
+  0% {opacity: 0;}
+  30% {opacity: 0;}
+  50% {opacity: 1;}
+}
