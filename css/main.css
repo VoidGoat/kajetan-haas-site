@@ -37,20 +37,34 @@ html {
   border-radius: 1000px;
 }
 
+/*.footer-button {
+  font-size: 4vmax;
+  min-width: 6vmax;
+  min-height: 6vmax;
+  justify-content: center;
+  height: inherit;
+  text-align: center;
+  line-height: 5.5vmax;
+  color: white;
+  background-color: #f65e5e;
+  transition: color 0.5s, transform 0.2s, background-color 0.5s;
+}
+.footer-button:hover {
+  transform: scale(1.2);
+  background-color: #bfbfbf;
+  text-decoration: none;
+}*/
 .footer-button {
   font-size: 40px;
-  /*width: inherit;*/
   min-width: 60px;
   min-height: 60px;
   justify-content: center;
   height: inherit;
-  /*padding: 50px;*/
   text-align: center;
   line-height: 60px;
   margin: 10px;
   color: white;
   background-color: #f65e5e;
-  /*border: 1px solid black;*/
   transition: color 0.5s, transform 0.2s, background-color 0.5s;
 }
 .footer-button:hover {
@@ -88,10 +102,10 @@ vertical-align: baseline;
   white-space: nowrap;
 }
 
-@media only screen and (min-width: 768px) {
-  header {
-    font-size: 20px;
-  }
+@media only screen and (min-width: 600px) {
+  /*.footer-button {
+    font-size: 3vmax;
+  }*/
 }
 @keyframes move {
     0%   {top: 100%; opacity: 0; width: 0; height: 0; border-radius: 100px; margin-left: 0;}
