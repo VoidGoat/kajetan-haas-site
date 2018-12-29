@@ -102,6 +102,27 @@ vertical-align: baseline;
   white-space: nowrap;
 }
 
+.portfolio {
+  width: 90%;
+  margin: auto;
+  /* display: table; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+}
+
+.video {
+  width: 560px;
+  margin-top: 20px;
+  font-size: 20px;
+  border: solid #ddd 1px;
+  padding: 0 5px 5px 5px;
+}
+.video p{
+  margin: 5px;
+}
+
 @media only screen and (min-width: 600px) {
   /*.footer-button {
     font-size: 3vmax;
