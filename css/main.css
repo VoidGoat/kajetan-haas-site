@@ -3,14 +3,15 @@ body {
   background-color: white;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  font-size: 40px;
+  /* font-size: 40px; */
   height: inherit;
-
+  width: 90%;
+  margin: auto;
 }
 html {
   height: 100%;
-
 }
+
 #name {
   transition: color 0.5s;
 }
@@ -121,6 +122,28 @@ vertical-align: baseline;
 }
 .video p{
   margin: 5px;
+}
+
+.article-list {
+  width: 90%;
+  margin:auto;
+  display: block;
+}
+.article-header {
+  margin-top: 5px;
+}
+.article-content {
+  display: inline-block;
+  vertical-align: top;
+
+  margin-left: 10px;
+}
+.article-content li {
+  margin-bottom: 10px;
+}
+
+.link {
+  text-decoration: none;
 }
 
 @media only screen and (min-width: 600px) {
