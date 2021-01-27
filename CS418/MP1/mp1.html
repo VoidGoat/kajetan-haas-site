@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en" style="width:100%; margin:0;">
+<head>
+<title>MP 1 CS 418</title>
+<meta charset="utf-8">
+</head>
+
+
+
+<script id="shader-vert" type="x-shader/x-vertex">
+   attribute vec3 aVertexPosition;
+   // attribute vec4 aVertexColor;
+   varying vec4 vColor;
+   uniform mat4 uModelMat;
+
+
+    void main(void) {
+        gl_Position = uModelMat * vec4(aVertexPosition, 1.0);
+        vColor = vec4(0.0, 1.0, 1.0, 1.0);
+    }
+</script>
+
+<script id="shader-frag" type="x-shader/x-fragment">
+
+// precision mediump float;
+precision highp float;
+varying vec4 vColor;
+
+uniform vec4 uColor;
+
+void main(void) {
+
+        gl_FragColor = uColor;
+ }
+</script>
+
+<script src="gl-matrix-min.js"></script>
+<script type="text/javascript" src="webgl-utils.js"></script>
+<script type="text/javascript" src="shader.js"></script>
+
+<script src="mp1.js"></script>
+
+
+<body onload="startup();" style="margin:0;">
+  <!-- <img src="logo-2.png" style="position:absolute; width:345px; height=500px; margin-left: 77px; opacity: 0.4; "/> -->
+
+  <canvas id="myGLCanvas" width="500" height="500"></canvas>
+  <div style="background-color: rgb(198, 198, 198); width:500px;">
+    <p>
+      Block I Controls
+    </p>
+    <input type="range" id="I-rot-speed" min="0" max="100" value="50">
+    <label for="I-rot-speed">rotation-speed</label>
+    <br>
+    <input type="range" id="wave-intensity" min="0" max="100" value="50">
+    <label for="wave-intensity">wave-intensity</label>
+
+    <br>
+    <input type="range" id="scale-intensity" min="0" max="100" value="50">
+    <label for="scale-intensity">scale-intensity</label>
+    <br>
+
+    <input type="range" id="overall-scale" min="0" max="100" value="50">
+    <label for="overall-scale">overall-scale</label>
+  </div>
+
+
+  <div style="background-color: rgb(198, 198, 198); width:500px;">
+    <p>Switch Animation</p>
+    <input type="radio" id="I" name="render-mode" value="I" checked>
+    <label for="I">Block-I</label><br>
+    <input type="radio" id="other" name="render-mode" value="other">
+    <label for="other">Shuffling Shapes</label>
+  </div>
+
+</body>
+
+
+</html>

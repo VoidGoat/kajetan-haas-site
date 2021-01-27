@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="en" style="width:100%; margin:0;">
+<head>
+<title>MP 4 CS 418</title>
+<meta charset="utf-8">
+</head>
+
+
+<!-- Teapot Shader -->
+<script id="sphere-shader-vert" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+    attribute vec3 aVertexNormal;
+
+    uniform mat4 uMVMatrix;
+    uniform mat4 uPMatrix;
+
+    varying vec3 vVertexNormal;
+    varying vec3 vVertexPosition;
+
+    void main(void) {
+      vVertexNormal = aVertexNormal;
+      vVertexPosition = aVertexPosition;
+
+      gl_Position = uPMatrix*uMVMatrix*vec4( aVertexPosition, 1.0);
+    }
+</script>
+
+<script id="sphere-shader-frag" type="x-shader/x-fragment">
+
+precision highp float;
+varying vec3 vVertexNormal;
+varying vec3 vVertexPosition;
+
+uniform mat4 uMVMatrix;
+
+uniform mat4 uPMatrix;
+uniform mat3 uNMatrix;
+
+uniform vec3 uEyePos;
+
+uniform vec3 uColor;
+
+
+vec3 lightPosition = vec3(3.0,3.0,3.0);
+
+vec3 uAmbientLightColor = vec3(0.1, 0.1, 0.1);
+vec3 uDiffuseLightColor = vec3(0.7, 0.7, 0.7);
+vec3 uSpecularLightColor = vec3(0.9, 0.9, 0.9);
+
+
+
+vec3 materialColor = vec3(1.0, 1.0, 0.0);
+vec3 uAmbientMaterialColor =vec3(1.0, 1.0, 0.0);
+vec3 uDiffuseMaterialColor = vec3(1.0, 1.0, 0.0);
+vec3 uSpecularMaterialColor = vec3(1.0, 1.0, 1.0);
+
+float uShininess = 50.0;
+
+
+
+void main(void) {
+
+  uAmbientMaterialColor = uDiffuseMaterialColor = uSpecularMaterialColor = uColor;
+
+
+
+  vec3 uLightPosition = ( vec4(lightPosition, 1.0)).xyz ;
+
+
+  // Calculate the vector (l) to the light source
+  vec3 vectorToLightSource = normalize(uLightPosition - uEyePos);
+
+  // Transform the normal (n) to view coordinates
+  vec3 normalEye = normalize(vVertexNormal);
+
+  // Calculate n dot l for diffuse lighting
+  float diffuseLightWeightning = max(dot(normalEye, vectorToLightSource), 0.0);
+
+  // Calculate the reflection vector (r) that is needed for specular light
+  vec3 reflectionVector = normalize(reflect(vectorToLightSource, normalEye));
+
+  // The camera in view coordinates is located in the origin and is pointing
+  // along the negative z-axis. Calculate viewVector (v)
+  // in eye coordinates as:
+  // (0.0, 0.0, 0.0) - vertexPositionEye3
+  vec3 viewVectorEye = normalize(vVertexPosition-uEyePos);
+
+  float rdotv = max(dot(reflectionVector, viewVectorEye), 0.0);
+
+  float specularLightWeightning = pow(rdotv, uShininess);
+
+  // Sum up all three reflection components and send to the fragment shader
+  gl_FragColor = vec4(((uAmbientLightColor*uAmbientMaterialColor)
+              + (uDiffuseLightColor*uDiffuseMaterialColor) * diffuseLightWeightning
+              + (uSpecularLightColor*uSpecularMaterialColor) * specularLightWeightning),1.0);
+
+ }
+
+</script>
+
+<script src="gl-matrix-min.js"></script>
+<script type="text/javascript" src="webgl-utils.js"></script>
+<script type="text/javascript" src="shader.js"></script>
+
+<script src="mp4.js"></script>
+
+
+<body onload="startup();" style="margin:0;">
+  <canvas id="myGLCanvas" width="800" height="600"></canvas>
+  <br>
+
+  <p><b>Controls:</b></p>
+  <p>Add Spheres: R</p>
+  <p>Clear Spheres: C</p>
+  <p>Orbit Right: D</p>
+  <p>Orbit Left: A</p>
+</body>
+
+
+</html>
