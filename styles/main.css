@@ -111,6 +111,10 @@ header h2 {
     font-weight: 500;
 }
 
+h1 span {
+    display: inline-block;
+}
+
 .item-full {
     width:90%;
     position: relative; 
@@ -225,28 +229,21 @@ header h2 {
 
 }
 
-@media only screen and (max-width: 1000px) {
-    body {
-        /* background: black; */
-    }
-    .item-image {
-        position: relative;
-        /* margin:auto; */
-        margin: 0;
-        top: 0;
-    }
-    .item-text {
-        padding: 40px 10px 10px 10px;
-        margin: 0 10px 0 10px;
-        left:0;
-        right: 0;
-        top:-40px;
-        bottom:0;
-    }
-    .item-full {
+
+
+
+.experiment-header {
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
+    /* word-wrap: break-word; */
+    width: 100%; 
+    text-align: center; 
+    margin: auto; 
+    font-size: 6rem; 
+    max-width: 100%; 
+    color: white; 
+    margin-bottom: 0;
     
-        margin-bottom: 0rem;
-    }
 }
 
 svg {
@@ -271,5 +268,40 @@ svg {
   overflow: hidden;
   z-index: -1;
 
+
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        /* background: black; */
+    }
+    .item-image {
+        position: relative;
+        /* margin:auto; */
+        margin: 0;
+        top: 0;
+    }
+    .item-text {
+        padding: 40px 10px 10px 10px;
+        margin: 0 10px 0 10px;
+        left:0;
+        right: 0;
+        top:-40px;
+        bottom:0;
+    }
+    .item-full {
+    
+        margin-bottom: 0rem;
+    }
+
+
+}
+
+/* Shrink Experiments header when the device width is too small */
+@media only screen and (max-width: 500px) {
+
+    .experiment-header {
+        font-size: 20vw; 
+    }
 
 }

@@ -1,0 +1,97 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<header>
+	<h1 >Project 3: Gradient Domain Editing CS 445</h1>
+	<h1>By Kajetan Haas</h1>
+
+</header>
+
+<hr/>
+
+
+<h1>Poisson Blending</h1>
+<article>
+	Background: <br>
+	<img src="images/belltower.jpg" height="400px"/>
+</article>
+<article>
+	Target: <br>
+	<img src="images/blimp.jpg" height="100px"/>
+</article>
+<article>
+		Layered: <br>
+		<img src="images/blimp_and_tower.jpg" height="400px"/>
+</article>
+<article>
+	Blend Result: <br>
+	<img src="images/blimp_blend.jpg" height="400px"/>
+</article>
+<p>
+	Explanation: <br />
+  Poisson blending works by setting up a matrix of constraints for each pixel in the image and solving the least squares problem.
+
+</p>
+
+<h2>More Poisson Blending</h2>
+<img src="images/shark_blend.png" height="500px"/>
+<img src="images/bear_blend_cloud.jpg" height="500px"/>
+
+
+<h2>Poisson Blending Failure</h2>
+<p>
+	As you can see in the image below, not all images are well suited for Poisson Blending.
+	In the example below the duck image that was added in had too much texture in the background which had
+ a large impact on the resulting image. Images with smooth backgrounds work much better for pasting in.
+</p>
+<img src="images/duck_failure.png" height="400px"/>
+
+
+<h1>Mixed Gradient</h1>
+<p>
+	This result of mixed gradient blending shows its strength. The text is added without disrupting the texture of the wall
+	and smoothly blends from areas in shadow to areas in light.
+</p>
+<article>
+	Background: <br>
+	<img src="images/wall.jpg" height="500px"/>
+</article>
+<article>
+	Target: <br>
+	<img src="images/graffiti.jpg" height="250px"/>
+</article>
+<article>
+	Blend Result: <br>
+	<img src="images/graffiti_mixed.png" height="500px"/>
+</article>
+
+<h2>Mixed Gradient and Poisson Comparison</h2>
+<p>
+	Using just the Poisson Blend does not work in some situations. You can see here that adding text with a smooth background to a wooden door smoothes the door texture.
+	To avoid this we use the highest gradient for any given pixel to keep the door texture.
+</p>
+<article>
+	Mixed Gradient:<br />
+	<img src="images/mix_grad_door.jpg" height="500px"/>
+</article>
+<article>
+	Poisson:
+	<br />
+	<img src="images/blend_door.jpg" height="500px"/>
+</article>
+
+<h1>Toy Problem</h1>
+My toy problem error is: 1.0459852106992799e-10 with atol and btol at 1e-20
+<h1>Difficulties</h1>
+<p>
+One difficulty was finding situations that this technique would work well in. Images with a noisy background will transfer their noise
+to the result and make the transition unnatural.
+</p>
+
+
+
+</body>
+</html>

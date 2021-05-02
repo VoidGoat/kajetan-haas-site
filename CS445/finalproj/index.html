@@ -1,0 +1,195 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<header>
+	<h1 >Final Project: Document Scan Cleanup with Pix2Pix and <i>Other Experiments</i></h1>
+	<h1>By Kajetan Haas</h1>
+
+</header>
+
+<hr/>
+<h1>Summary</h1>
+<p>
+	For my final project I implemented the Pix2Pix network in PyTorch.
+
+	Pix2Pix is trained to translate from one class of images to another. For example: from
+	a line drawing to a colored image, or from a day time picture to a night time picture.
+
+	Pix2Pix is an example of a cGAN, or conditional Generative Adversarial Network.
+	In this case the network is conditioned on the input image.
+
+</p>
+<p>
+
+	The paper can be found here:
+<a href="https://phillipi.github.io/pix2pix/">https://phillipi.github.io/pix2pix/</a>
+<br>
+
+
+The Pix2Pix architecture is described in more detail here:
+<a href="https://affinelayer.com/pix2pix/">https://affinelayer.com/pix2pix/</a> <br>
+I used these resources to understand the model in order to write the implementation in PyTorch.
+
+</p>
+
+<p>Pix2Pix is based on a standard Encoder-Decoder structure. Its distinguishing features
+are the fact that it uses the discriminator as a loss function and that information is
+passed between layers using the U-Net layout. It is also integral that the output is
+conditioned on the input. </p>
+
+<p>
+
+
+
+	I did multiple experiments using the Pix2Pix network.	To test the initial functionality
+	of the model I trained it on the facade dataset provided by the creators of the Pix2Pix network.
+	I then tried generating color images from edge images.
+<br />
+	The Canny edge operator was used to generate edges for different datasets. Improving on the
+	edge detection could have yielded better results overall. In the original Pix2Pix paper,
+	the Hollistically-Nested Edge Detector was used, which seemed to return better results than
+	the Canny edge operator.<br />
+	Finally, I experimented with removing noise from images of text.
+
+</p>
+
+<h1>Results</h1>
+
+<h2>Facades</h2>
+
+<p>
+	I first trained my network on the Facades dataset used in the Pix2Pix paper. I achieved
+	reasonable results. I only trained for 100 epochs compared to the recommended 200 epochs.
+</p>
+<article>
+	Facades: <br>
+	<img src="images/facades_final.png" height="500px"/>
+</article>
+
+
+<h2>Text Denoising for Document Scanning</h2>
+<p>
+	I used the Pix2Pix model to translate from noisy/dirty images of text to clean images.
+	The model was trained on the dataset found here:
+	<a href="https://www.kaggle.com/c/denoising-dirty-documents/data">https://www.kaggle.com/c/denoising-dirty-documents/data</a>
+<br />
+The dataset has 144 noisy-to-clean image pairs, which were used to train the model. The results
+ are impressive considering the small training set. After 20 epochs it was able to effectively
+ remove noise from real life images.
+</p>
+<article>
+	Text Pair Example: <br>
+	<img src="images/text_example.jpg" height="250px"/>
+</article>
+
+<p>
+	The generated image looks as if it were scanned, with white balance adjusted, small wrinkles removed,
+	and the lighting is made consistent. No processing was done on these images beyond the network, but
+	it is clear that the results could be improved even further with classical image processing
+	techniques.
+</p>
+
+
+<article>
+	Original Image: <br>
+	<img src="images/cache_orig.png" height="500px"/>
+</article>
+
+<article>
+	Cleaned Image: <br>
+	<img src="images/cache_scanned.png" height="500px"/>
+</article>
+
+<article>
+	Close Up: <br>
+	<img src="images/scan_closeup.png" height="500px"/>
+</article>
+<p>
+	A less extreme example with shadow removal.
+</p>
+<article>
+	Original Image: <br>
+	<img src="images/machine_orig.jpg" height="400px"/>
+</article>
+<article>
+	Cleaned Image: <br>
+	<img src="images/machine_scanned.jpg" height="400px"/>
+</article>
+<p>
+More Examples:
+</p>
+<article>
+	Book: <br>
+	<img src="images/book.jpg" height="700px"/>
+</article>
+<article>
+	Color Image Failure: <br>
+	<img src="images/ad.jpg" height="700px"/>
+</article>
+<p>Since the network was not trained on any examples with color it does not produce very good
+results when trying to denoise images with lots of color. It may be possible to improve this
+through data augmentation. Creating alternate training images with different colored backgrounds,
+or different colored text might work.</p>
+
+
+
+
+<h2>Bart Simpson</h2>
+<p>
+For my first extension of the network I trained it on over 1000 images of Bart Simpson.
+With the hope that the network would be able to color in a line drawing.
+The network translates between edge images of Bart to a full color version. The edge images
+were generated using the Canny operator. <br />
+
+The model was trained using the parameters from the original paper for 40 epochs on 1000
+edge-to-image pairs. While the results are far from perfect it does get interesting results.
+Bart's eyes and face are almost always colored correctly and everything underneath his face is typically
+colored orange to match the shirt he usually wears.
+</p>
+
+<p>
+	The model also works decently on user-created line work:
+</p>
+
+<article>
+	Edge Image (top), Pix2Pix Result(middle), Actual(bottom): <br>
+	<img src="images/bart.png" height="500px"/>
+</article>
+
+<article>
+	Drawn Bart: <br>
+	<img src="images/bart_handdrawn.png" height="500px"/>
+</article>
+<p>
+	The images of Bart Simpson were taken from this dataset:
+	<a href="https://www.kaggle.com/alexattia/the-simpsons-characters-dataset">https://www.kaggle.com/alexattia/the-simpsons-characters-dataset</a>
+</p>
+
+
+<h2>Pokemon (Failed Attempt)</h2>
+<p>I also attempted to train a edge-to-pokemon model, however this did not produce good results.
+The model predicted the shading and intensity decently well, but all of the generated pokemon
+were a brownish gray. I believe this is because the pokemon have too much variety in their color
+that it is difficult for the network to decode the color from just the edges. There may be a way to
+improve these results, but I could not improve them. Training for a longer period seemed to introduce
+more color, but I was not able to let it train long enough to get better results.  <br />
+<!-- A very similar implementation with more colorful results can be found here: https://zaidalyafeai.github.io/pix2pix/pokemon.html -->
+Images are from: <a href="https://www.kaggle.com/vishalsubbiah/pokemon-images-and-types">https://www.kaggle.com/vishalsubbiah/pokemon-images-and-types</a>
+</p>
+
+<article>
+	Pokemon: <br>
+	<img src="images/pokemon.png" height="500px"/>
+</article>
+<h1>Implementation Details</h1>
+<p>
+The model was made using PyTorch and was trained on Google's Colaboratory servers.
+</p>
+
+
+
+</body>
+</html>

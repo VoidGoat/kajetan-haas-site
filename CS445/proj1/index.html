@@ -1,0 +1,93 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<h1>Project 1: Hybrid Images CS 445</h1>
+<h1>By Kajetan Haas</h1>
+<h1>Part One: Hybrid Images</h1>
+<hr />
+<h2>Roadster/Corolla</h2>
+<p>
+	My best result was using using a Toyota Corolla as the low-frequency image and a Tesla Roadster as the high-frequency image.
+	The Corolla is blurred with a Gaussian filter and the Roadster is sharpened with the Laplacian filter. The low-frequency
+	Corolla and the high-frequency Roadster are merged together to create the hybrid image.
+</p>
+<img src="images/roadster_hybrid.png" height="500px"/>
+<img src="images/roadster_hybrid.png" height="150px"/>
+<img src="images/roadster_hybrid.png" height="75px"/>
+<img src="images/corolla_roadster.png" height="500px" />
+<p>I used a cutoff value of 5 for the high and low filters</p>
+<img src="images/roadster_highlow.png" height="500px"/>
+<p>FFT plots of all images</p>
+<img src="images/roadster_fft.png" width="100%"/>
+
+<h2>Yawning Cat</h2>
+<p>
+	Another successful example uses a picture of my cat lying normally as the low-frequency and my cat yawning as the high-frequency.
+	The cutoffs are 6 for the low-frequency, and 11 for the high-frequency.
+</p>
+<img src="images/yawn.png" height="500px"/>
+<img src="images/yawn_hybrid.png" height="500px"/>
+<img src="images/yawn_hybrid.png" height="200px"/>
+<img src="images/yawn_hybrid.png" height="100px"/>
+
+<h2>Failure</h2>
+<p>
+	This was the first attempt at a hybrid image. It did not work very well. The images do not line up enough,
+	so they do not merge well. The goat image also adds a noticeable line to the image at its border.
+</p>
+<img src="images/goat.jpg" height="300"/>
+<img src="images/zuko.jpg" height="500px"/>
+<img src="images/goat_cat.png" height="500px"/>
+
+
+<hr>
+<h1>Part Two: Image Enhancement</h1>
+
+<h2>Contrast Enhancement</h2>
+<h3>Gamma Correction</h3>
+<p>
+	Using Gamma Correction yieled the most visually pleasing results. These images were created with Gamma Correction with value 0.5;
+</p>
+<img src="images/gamma_candle.png" height="500px"/>
+<img src="images/gamma_cat.jpg" height="500px"/>
+
+<h3>Histogram Equalization</h3>
+<p>
+	This image was generated using histogram equalization. The resulting image is very noisy and not very pleasing,
+	but it shows an impressive amount of detail that was completely hidden in the original.
+</p>
+<img src="images/contrast_candle.png" height="500px"/>
+
+
+
+<h2>Color Enhancement</h2>
+<p>
+	The image was converted into the HSV colorspace and then the saturation was increased using Gamma Correction with value of 0.5.
+</p>
+<img src="images/color_enhanced.png" height="500px"/>
+
+<h2>Color Shift</h2>
+<p>
+	Shifted colors using the LAB color space. B was shifted down to decrease the amount of yellow in the picture.
+	 A was shifted up to increase the amount of red in the picture.
+	Gamma Correction was used for the first set of images. using values 0.75 for the red image and 1.25 for the less yellow image.
+</p>
+<h3>Gamma Correction</h3>
+<img src="images/color_shift_gamma.png" height="500px"/>
+<h3>Color Multiplication</h3>
+<p>
+	I also tried shifting the colors by multiplying the A and B channels.
+	This yielded more uniform results, but the intensities do not span the full range of color.
+	I multipied by 0.8 and 1.2 for the A and B channels respectively.
+</p>
+<img src="images/color_shift_multi.png" height="500px"/>
+
+
+<h1>Bells and Whistles</h1>
+<h2></h2>
+<h2>All Three Image Enhancements Done</h2>
+</body>
+</html>

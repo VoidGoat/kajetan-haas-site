@@ -1,0 +1,105 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<h1>Project 2: Image Quilting CS 445</h1>
+<h1>By Kajetan Haas</h1>
+
+<hr />
+<h1>Quilting Methods</h1>
+<h2>Comparison</h2>
+<div>
+	<h3>Random</h3>
+	<p>
+	Randomly sampling patches gives a very poor result. The patches are not related to each other at all, so the result is very blocky.
+	</p>
+	<img src="images/brick_quilt_random.png" height="500px"/>
+</div>
+<div>
+	<h3>Quilt Simple</h3>
+	<p>
+		Using the SSD to find patches that overlap well with the existing patches gives a better result.
+		 Each patch is based on the adjacent patches so the result is more smooth.
+		However, since the patches are not blended together at all there is still some blockiness.
+	</p>
+	<img src="images/brick_quilt_simple.png" height="500px"/>
+</div>
+<div>
+	<h3>Quilt Cut</h3>
+	<p>
+		Quilt cut uses the same method for choosing a new patch as quilt simple, but it removes blockiness by cutting away parts of the added patch so that the transition
+		is more smooth. This achieves a high quality result that is very smooth.
+	</p>
+	<img src="images/brick_quilt_cut.png" height="500px"/>
+</div>
+<p>
+
+</p>
+
+<h1>Seam Finding</h1>
+<p>
+	Overview of the seam finding process: <br />
+	Two selected patches.
+</p>
+<img src="images/patch1.png" height="140px"/>
+<img src="images/patch2.png" height="140px"/>
+<br />
+<p>
+	The cost of the overlapping portions and the minimum cut path.
+</p>
+<img src="images/cost.png" height="140px"/>
+<img src="images/cut_line.png" height="140px"/>
+<img src="images/cost_and_cut.png" height="140px"/>
+<br />
+<p>The two patches next to each other with the minimum cut path highlighted.</p>
+<img src="images/together.png" height="140px"/>
+<p> The image quilting texture synthesis algorithm picks patches with a low cost of overlap and then find the cost of the difference between the overlapping portions
+and defines a new border between the two images that makes the transition more seamless
+</p>
+
+
+<h1>Quilting Texture Synthesis Results</h1>
+<img src="images/sidewalk_sample.jpg" height="140px"/>
+<img src="images/sidewalk_cut.png" height="500px"/>
+<br />
+<img src="images/bark_sample.png" height="140px"/>
+<img src="images/bark_cut.png" height="500px"/>
+<br />
+<img src="images/text_sample.jpg" height="140px"/>
+<img src="images/text_cut.png" height="500px"/>
+<br />
+<img src="images/texture.png" height="140px"/>
+<img src="images/texture_cut.png" height="500px"/>
+
+
+<h1>Texture Transfer</h1>
+<p>
+	Texture transfer works by using the same quilt cut function but with an additional cost. the additional cost is the difference between the luminance of
+	a target image and the sample image. This ensure that the patches that are chosen match the luminance of the target image.
+</p>
+<img src="images/feynman.tiff" height="400px"/>
+<img src="images/sketch.tiff" height="400px"/>
+<img src="images/transfer_feynman.png" height="500px"/>
+<br />
+
+<img src="images/gambino.jpg" height="400px"/>
+<img src="images/toast.jpg" height="400px"/>
+<img src="images/transfer_gambino.png" height="500px"/>
+
+
+<h2>Design Decisions</h2>
+<p>One design decision I made was selecting a random patch from the k patches with the lowest cost. This was done instead of selecting patches randomly that
+were below a certain cost threshold.</p>
+<br />
+
+<h2>Difficulties</h2>
+<p>
+One of the main difficulties was making sure that all the indices of patches were properly selected, so that the correct patch was chosen.
+It was also often difficult to make good looking texture synthesis results.
+</p>
+
+
+</body>
+</html>

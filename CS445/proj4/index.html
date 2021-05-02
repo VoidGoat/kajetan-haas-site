@@ -1,0 +1,115 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<header>
+	<h1 >Project 4: Image Based Lighting CS 445</h1>
+	<h1>By Kajetan Haas</h1>
+
+</header>
+
+<hr/>
+<h1>Data Collection</h1>
+<article>
+	Low Exposure: <br>
+	<img src="images/low_expo.jpg" height="400px"/>
+</article>
+<article>
+	Medium Exposure: <br>
+	<img src="images/med_expo.jpg" height="400px"/>
+</article>
+<article>
+	High Exposure: <br>
+	<img src="images/high_expo.jpg" height="400px"/>
+</article>
+<br>
+<article>
+	Background: <br>
+	<img src="images/background.jpg" height="400px"/>
+</article>
+
+<h1>LDR Merging</h1>
+<h2>Naive Approach</h2>
+<p>
+	The Naive approach for LDR merging simply scales all LDR images as if they
+	were exposed for the same amount of time and then averages these images into one HDR image.
+	The log irradiance should become more similar with better methods of estimation, since they
+	are trying to represent objective reality.
+</p>
+<article>
+	Naive Result: <br>
+	<img src="images/naive.png" height="400px"/>
+</article>
+
+
+
+<h2>Filtered Approach</h2>
+<p>
+The filtered approach to LDR merging uses the same method as the naive approach but
+gives more weight to the middle intensity values.
+</p>
+<img src="images/filtered.png" height="400px"/>
+<h2>Estimation Approach</h2>
+<p>
+The estimation approach to LDR merging solves for the response function of the camera in
+order to get a better estimate of the actual irradiance of pixels.
+</p>
+<img src="images/estimation.png" height="400px"/>
+
+
+<h1>Equirectangular HDR Image</h1>
+<p>
+In order to use a mirror ball HDR image for image based lighting we need to change
+its shape. Blender reads in an equirectangular image for its environment texture,
+so we need to remap the circle mirror ball image to be a rectangle. To do this we assign
+coordinates to the circle mirror ball image and then remap them to a rectangular image.
+
+</p>
+<article>
+	Remapped Equirectangular Image: <br>
+	<img src="images/equirectangular.png" height="500px"/>
+</article>
+<p>
+	The following response function was recovered with lamda=75.
+</p>
+<img src="images/g_graph.png" height="350px"/>
+
+
+<h1>Compositing</h1>
+<h2>Results #1</h2>
+<article>
+	Render with Objects: <br>
+	<img src="images/render_obj_2.jpg" height="400px"/>
+</article>
+<article>
+	Render without Objects: <br>
+	<img src="images/render_noobj_2.jpg" height="400px"/>
+</article>
+<article>
+	Object Mask: <br>
+	<img src="images/render_mask_2.jpg" height="400px"/>
+</article>
+<article>
+	Final Composite: <br>
+	<img src="images/merged_dragon.jpg" height="500px"/>
+</article>
+
+<h2>Results #2</h2>
+<article>
+	Final Composite: <br>
+	<img src="images/merged_statue.jpg" height="500px"/>
+</article>
+
+<h1>Difficulties</h1>
+<p>
+Aligning images correctly in Blender so that they matched the perspective of the photo
+was very difficult. I think the dragon looks alright, but the statue does not match up quite right.
+
+</p>
+
+
+
+</body>
+</html>

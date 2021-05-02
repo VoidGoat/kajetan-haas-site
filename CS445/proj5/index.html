@@ -1,0 +1,183 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<header>
+	<h1 >Project 5: Video Stitching and Processing CS 445</h1>
+	<h1>By Kajetan Haas</h1>
+</header>
+
+<hr/>
+<p>
+	This project involves creating various panoramic images by aligning images taken from the same location.
+</p>
+<h1>Part 1: Stitch Two Keyframes</h1>
+<p>
+	The provided blending function replaces all zero values in the first image with the values of the second image. However, this creates undesirable color artifacts.
+	I wrote a new blending function that simply pastes one image on top of the other. This method produces no artifacts, but the transition could be improved with a cutting function.
+</p>
+<article>
+	Frame 270: <br>
+	<img src="images/warped_270.jpg" height="400px"/>
+</article>
+<article>
+	Frame 450: <br>
+	<img src="images/warped_450.jpg" height="400px"/>
+</article>
+<article>
+	Frame 270 Square: <br>
+	<img src="images/square_270.jpg" height="400px"/>
+</article>
+<article>
+	Frame 450 Square: <br>
+	<img src="images/square_450.jpg" height="400px"/>
+</article>
+<article>
+	Blended Image: <br>
+	<img src="images/blended_p1_1.png" height="400px"/>
+</article>
+
+<h1>Part 2: Panorama Using Five Keyframes</h1>
+<p>
+	This part shows the projection of five frames onto the same coordinate space.
+</p>
+<article>
+	Panorama: <br>
+	<img src="images/output_pt2.png" width="100%"/>
+</article>
+
+<h1>Part 3: Map Video to Reference Plane</h1>
+<p>
+In order to generate a panorama you need to map every frame onto a reference plane. Using the provided code yielded very unstable results, so I wrote a different method for projecting the frames.
+</p>
+<p>Unstable (using provided code):</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6J-tIGRO8xA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>
+	This video shows my improved method for mapping the frames. I compute the projection to the reference frame from a few frames at different intervals.
+	For example: 90-->450, 180-->450 ... 540-->450, 630-->450. When I compute the projection for every frame I find the closest frame from the precomputed frames and project the current frame onto that
+	and multiply. You can see this yields much more smooth results.
+
+</p>
+<p>
+	Improved version:
+</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EKflovcy3Ug" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1>Part 4: Background Panorama</h1>
+<p>
+	For this part I took the median of every pixel in the video from part 3 to generate a panorama of only the background.
+</p>
+<article>
+	Median Background Panorama: <br>
+	<img src="images/background_pan.png" width="100%"/>
+</article>
+
+
+<h1>Part 5: Background Movie</h1>
+<p>
+	To generate a movie of just the background we use the inverse of the projection that was used in part 3 and apply it to the background panorama from part 4.
+</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gg8Mq9Rfs14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1>Part 6: Foreground Movie</h1>
+<p>
+	To generate a movie of just the foreground I applied the same process as part 5, but subtracted the background frames from the original frames. I then thresholded the values to remove noise and
+	added in the average color to make it look closer to the original.
+</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SNnRjy_8YUI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1>Bells and Whistles</h1>
+<h1>Extra Video #1: The Quad</h1>
+<h2>Original Video</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/a4-MFlE1ZFA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2>Part 1</h2>
+<article>
+	Frame 270: <br>
+	<img src="images/warped_270_e1.jpg" height="400px"/>
+</article>
+<article>
+	Frame 450: <br>
+	<img src="images/warped_450_e1.jpg" height="400px"/>
+</article>
+<article>
+	Frame 270 Square: <br>
+	<img src="images/square_270_e1.jpg" height="400px"/>
+</article>
+<article>
+	Frame 450 Square: <br>
+	<img src="images/square_450_e1.jpg" height="400px"/>
+</article>
+<article>
+	Blended Image: <br>
+	<img src="images/blended_p1_1_e1.png" height="400px"/>
+</article>
+<h2>Part 2</h2>
+<article>
+	Panorama: <br>
+	<img src="images/output_pt2_e1.png" width="100%"/>
+</article>
+<h2>Part 3</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jYer9ywatWo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2>Part 4</h2>
+<article>
+	Median Background Panorama: <br>
+	<img src="images/part4_pan_finished_e1.png" width="100%"/>
+</article>
+
+<h2>Part 5</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c2F2PCBrMiY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2>Part 6</h2>
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/l-qoekaDZnY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L6TB-ea78lY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br />
+
+
+<h1>Extra Video #2:</h1>
+<h2>Original Video</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eOx8xNMkdFM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2>Part 1</h2>
+<article>
+	Frame 270: <br>
+	<img src="images/warped_270_e2.jpg" height="400px"/>
+</article>
+<article>
+	Frame 450: <br>
+	<img src="images/warped_450_e2.jpg" height="400px"/>
+</article>
+<article>
+	Frame 270 Square: <br>
+	<img src="images/square_270_e2.jpg" height="400px"/>
+</article>
+<article>
+	Frame 450 Square: <br>
+	<img src="images/square_450_e2.jpg" height="400px"/>
+</article>
+<article>
+	Blended Image: <br>
+	<img src="images/blended_p1_1_e2.png" height="400px"/>
+</article>
+<h2>Part 2</h2>
+<article>
+	Panorama: <br>
+	<img src="images/output_pt2_e2.png" width="100%"/>
+</article>
+<h2>Part 3</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LJyayxIZFl0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2>Part 4</h2>
+<article>
+	Median Background Panorama: <br>
+	<img src="images/part4_pan_finished_e2.png" width="100%"/>
+</article>
+
+<h2>Part 5</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CNPbuKDa29Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2>Part 6</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/457N8753geQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</body>
+</html>
