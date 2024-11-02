@@ -20,6 +20,10 @@
 	--narrow-content-margin: var(--line-height-size);
   } */
 
+html {
+	background-color: rgb(243, 241, 240);
+}
+
 html,
 body {
 	min-height: 100%;
@@ -33,8 +37,9 @@ body {
 /* html, */
 body {
 
-	min-height: 100%;
-	min-width: 100%;
+	/* min-height: 100%; */
+	min-height: 100vh;
+	min-width: 100vw;
 	margin: 0;
 
 	font-family: "Lato", sans-serif;
@@ -46,6 +51,7 @@ body {
 	/* background-color: #fffaf0; */
 	background: url('imgs/paper_texture.jpg');
 	background-size: 800px 800px;
+	background-repeat: repeat;
 
 	/* For iOS notch */
 	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
