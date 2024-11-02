@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+@title = you should make a blog
+@description = In which, I tell you to make a blog
+@publish_date = 10/31/2024
+@update_date = 10/31/2024
+
+<head>
+	!include(basic_head)
+</head>
+
+<body>
+	!include(blog_nav)
+
+	<div class="blog-header">
+		<div class="blog-title">
+			@title
+		</div>
+		<div class="blog-date">Oct. 21 2024</div>
+	</div>
+	<!-- <div class="dot"></div> -->
+	<div class="blog-section">
+		!include_md(/Users/kajetan/Desktop/You should make a blog.md)
+	</div>
+
+	!include(rss_feed_link)
+
+</body>
+
+</html>
