@@ -20,13 +20,15 @@ output_directory: str
 def main():
 	global output_directory
 
-	if len(sys.argv) != 3:
-		print("Arguments should be two directories")
-		return
+	# if len(sys.argv) != 3:
+	# 	print("Arguments should be two directories")
+	# 	return
 
-	posts_directory = sys.argv[1]
-	# output_directory = sys.argv[2]
-	output_directory ="../../blog/" 
+	project_root = "../../"
+
+	# posts_directory = sys.argv[1]
+	posts_directory = project_root + "blog_source/blueprint/blog"
+	output_directory = project_root + "_built_site/blog/" 
 
 	blog_entries = []
 

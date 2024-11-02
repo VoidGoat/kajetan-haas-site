@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>Kajetan's blog</title>
+	<id>https://kajetan.org/blog</id>
+	<link rel="alternate" href="https://kajetan.org/blog"/>
+	<link rel="self" href="https://kajetan.org/blog/atom.xml"/>
+	<updated>2024-11-01T18:28:56.980503</updated>
+	<author>
+		<name>Kajetan Haas</name>
+	</author>
+	
+	<entry>
+		<title>you should make a blog</title>
+		<link rel="alternate" type="text/html" href="https://www.kajetan.org/blog/you-should-make-a-blog"/>
+		<id>https://www.kajetan.org/blog/you-should-make-a-blog</id>
+		<published>2024-10-31 00:00:00</published>
+		<updated>2024-10-31 00:00:00</updated>
+		<content type="html">you should make a blog</content>
+	</entry>
+
+</feed>
