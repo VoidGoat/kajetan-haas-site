@@ -4,7 +4,7 @@
 	<id>https://kajetan.org/blog</id>
 	<link rel="alternate" href="https://kajetan.org/blog"/>
 	<link rel="self" href="https://kajetan.org/blog/atom.xml"/>
-	<updated>2024-11-02T11:43:25.219982</updated>
+	<updated>2026-01-13T08:30:34.722680</updated>
 	<author>
 		<name>Kajetan Haas</name>
 	</author>
@@ -13,9 +13,18 @@
 		<title>you should make a blog</title>
 		<link rel="alternate" type="text/html" href="https://www.kajetan.org/blog/you-should-make-a-blog"/>
 		<id>https://www.kajetan.org/blog/you-should-make-a-blog</id>
-		<published>2024-10-31 00:00:00</published>
-		<updated>2024-10-31 00:00:00</updated>
+		<published>2025-01-23 00:00:00</published>
+		<updated>2025-01-23 00:00:00</updated>
 		<content type="html">you should make a blog</content>
+	</entry>
+
+	<entry>
+		<title>Best Stuff of 2025</title>
+		<link rel="alternate" type="text/html" href="https://www.kajetan.org/blog/best-stuff-of-2025"/>
+		<id>https://www.kajetan.org/blog/best-stuff-of-2025</id>
+		<published>2026-01-13 00:00:00</published>
+		<updated>2026-01-13 00:00:00</updated>
+		<content type="html">Best Stuff of 2025</content>
 	</entry>
 
 </feed>

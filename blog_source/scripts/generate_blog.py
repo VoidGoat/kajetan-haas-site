@@ -169,6 +169,8 @@ def process_html(html: str, file_path: str) -> tuple[str, BlogEntry]:
 
 	html = re.sub(r'!include_md\((.*)\)', lambda m: (include_markdown(m.group(1))), html, flags=re.MULTILINE)
 
+	html = re.sub(r'!blog_list\((.*)\)', lambda m: (blog_list(m.group(1))), html, flags=re.MULTILINE)
+
 	html = re.sub(r'^@([a-zA-Z_]+)\s*=\s*(.*)\n', parse_attribute, html, flags=re.MULTILINE)
 	html = re.sub(r'@([a-zA-Z_]+)', lambda m: page_attributes.get(m.group(1)), html, flags=re.MULTILINE)
 
@@ -190,8 +192,32 @@ def include_html(component_name: str) -> str:
 		return file.read()
 
 def include_markdown(markdown_path: str) -> str:
-	with open(markdown_path, 'r') as file:
+	with open("../../" + markdown_path, 'r') as file:
 		return markdown_to_html(file.read())
+
+def blog_list(blog_count):
+	# Use '.' for the current directory
+	# Use Path('/path/to/directory') for a specific directory
+	directory_path = Path('../blueprint/blog/') 
+
+	files = [p.name for p in directory_path.iterdir() if p.is_file()]
+	print("TEST")
+
+	list_result = ""
+	count = 0
+	for file in files:
+		if file == "index.html":
+			continue
+		count += 1
+		post_name = file.split(".")[0]
+		list_result += f"""
+		<a class="blog-link" href="/blog/{post_name}/">
+			<p class="blog-number">no. {count}</p>
+			<p class="blog-name">{post_name.replace('-', ' ')}</p>
+		</a>
+"""
+	print(files)
+	return list_result
 
 def remove_list_characters(text: str) -> str:
 	return re.sub(r'(^\s*[-*]\s*)', "", text)
@@ -201,7 +227,7 @@ def markdown_to_html(markdown_text):
 
     
     # Headers (e.g., # Header, ## Header)
-    html = re.sub(r'^(#{1,6})\s*(.*)\n*', lambda m: f"<h{len(m.group(1))}>{m.group(2)}</h{len(m.group(1))}>", html, flags=re.MULTILINE)
+    html = re.sub(r'^(#{1,6})\s*(.*)\n*', lambda m: f"<h{len(m.group(1))}>{m.group(2)}</h{len(m.group(1))}>\n", html, flags=re.MULTILINE)
     
     # Bold (e.g., **bold text**)
     html = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', html)
@@ -212,16 +238,21 @@ def markdown_to_html(markdown_text):
     # Highlight (e.g., ==highlighted text==)
     html = re.sub(r'==(.*?)==', r'<mark>\1</mark>', html)
     
-    # Links (e.g., [text](url))
-    html = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', html)
     
     # Unordered Lists (e.g., - item or * item)
+    # html = re.sub(r'(^\s*[-*]\s+.*(?:\n\s*[-*]\s+.*)*)\n*', lambda m: "<ul>" + ''.join(f"<li>{remove_list_characters(item.strip())}</li>" for item in m.group(1).splitlines()) + "</ul>", html, flags=re.MULTILINE)
     html = re.sub(r'(^\s*[-*]\s+.*(?:\n\s*[-*]\s+.*)*)\n*', lambda m: "<ul>" + ''.join(f"<li>{remove_list_characters(item.strip())}</li>" for item in m.group(1).splitlines()) + "</ul>", html, flags=re.MULTILINE)
     # html = re.sub(r'^\s*[-*]\s+.*(?:\n\s*[-*]\s+(.*))*', lambda m: "<ul>" + ''.join(f"<li>{item.strip()}</li>" for item in m.group(1).splitlines()) + "</ul>", html, flags=re.MULTILINE)
     # html = re.sub(r'(^\s*[-*]\s+.*(\n\s*[-*]\s+(?:.*))*)', lambda m: "<ul>" + ''.join(f"<li>{item.strip()}</li>" for item in m.group(1).splitlines()) + "</ul>", html, flags=re.MULTILINE)
     
     # Ordered Lists (e.g., 1. item)
     html = re.sub(r'(^\s*\d+\.\s+.*(?:\n\s*\d+\.\s+.*)*)', lambda m: "<ol>" + ''.join(f"<li>{item.strip()[3:]}</li>" for item in m.group(1).splitlines()) + "</ol>", html, flags=re.MULTILINE)
+
+    # Links (e.g., [text](url))
+    html = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', html)
+
+    # Horizontal rule
+    html = re.sub(r'---', "<hr>", html)
 
     # Line breaks for single newlines
     # html = re.sub(r'\n$', "<br>", html, flags=re.MULTILINE)
@@ -237,6 +268,50 @@ def markdown_to_html(markdown_text):
 
     return html
 
+# AI generated version
+# def markdown_to_html(markdown_text):
+#     html = markdown_text
+
+#     # Headers (e.g., # Header, ## Header)
+#     html = re.sub(r'^(#{1,6})\s*(.*)\n*', lambda m: f"<h{len(m.group(1))}>{m.group(2)}</h{len(m.group(1))}>\n", html, flags=re.MULTILINE)
+    
+#     # Bold (e.g., **bold text**)
+#     html = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', html)
+    
+#     # Italics (e.g., *italic text*)
+#     html = re.sub(r'\*(.*?)\*', r'<em>\1</em>', html)
+
+#     # Highlight (e.g., ==highlighted text==)
+#     html = re.sub(r'==(.*?)==', r'<mark>\1</mark>', html)
+
+#     # Horizontal rule
+#     html = re.sub(r'---', "<hr>", html)
+    
+    
+#     # Unordered Lists (e.g., - item or * item)
+#     html = re.sub(r'(^\s*[-*]\s+.*(?:\n\s*[-*]\s*.*)*)\n*', lambda m: "<ul>" + ''.join(f"<li>{remove_list_characters(item.strip())}</li>" for item in m.group(1).splitlines()) + "</ul>", html, flags=re.MULTILINE)
+    
+#     # Ordered Lists (e.g., 1. item)
+#     html = re.sub(r'(^\s*\d+\.\s+.*(?:\n\s*\d+\.\s+.*)*)', lambda m: "<ol>" + ''.join(f"<li>{item.strip()[3:]}</li>" for item in m.group(1).splitlines()) + "</ol>", html, flags=re.MULTILINE)
+
+#     # Links (e.g., [text](url))
+#     html = re.sub(r'$(.*?)$$(.*?)$', r'<a href="\2">\1</a>', html)
+
+
+#     # Line breaks for single newlines
+#     html = re.sub(r'\n(?=\s*\n)', "\n", html)
+    
+#     # Split paragraphs properly, only on actual paragraph breaks
+#     html_paragraphs = re.split(r'\n(?=\s*\n|$)', html.strip())
+    
+#     # Line breaks for single newlines and split paragraphs correctly
+#     # Use a more precise regex to avoid breaking within inline content like links
+#     lines = [line for line in re.split(r'\n+', html) if line.strip()]
+#     paragraph_html = [f"<p>{line}</p>" for line in lines]
+    
+#     # Join all parts into the final HTML structure without top-level p tags
+#     html = "\n".join(paragraph_html)
+#     return html
 
 main()
 
