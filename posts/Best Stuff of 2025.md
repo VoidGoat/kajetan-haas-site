@@ -1,7 +1,7 @@
 Lots of things both did and did not happen in 2025. Maybe too many things in the did category. One of the things that happened is that I enjoyed a variety of great art. This a non-exhaustive list of some of the greatness of human innovation I partook in and would recommend to you. A lot of these did not come out in 2025 and that is just when I found them, but good is good.
 
 # Books
-- The Three Body Trilogy: Very enjoyable and inventive sci fi.
+- Remembrance of Earth's Past trilogy (The Three-Body Problem): Very enjoyable and inventive sci fi.
 - Project Hail Mary: One of the most well paced books I have read. Hard to stop reading once you start. It has such a cinematic quality that I feel like I've already seen the movie adaptation.
 - [Are We Human?](https://www.lars-mueller-publishers.com/are-we-human): I found this book because I was researching the origin of blogs and found that Peter Merholz originally coined the term as a shortening of weblog, and still had a blog running which [recommended this book](https://www.peterme.com/2023/01/01/the-best-books-i-read-in-2022-part-2-non-fiction/). So it seems appropriate I should recommend it again here. If you are interested in design, anthropology, modern humanity or just like fun pictures, this is a fascinating book. 
 - The Ministry of Time: Good fun book. 
